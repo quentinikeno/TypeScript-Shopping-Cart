@@ -6,6 +6,7 @@ export default function Navbar() {
 		<nav className="navbar" role="navigation" aria-label="main navigation">
 			<div className="container">
 				<div className="navbar-brand">
+					<i className="fa-solid fa-shop navbar-item fa-2x"></i>
 					<a
 						role="button"
 						className="navbar-burger"
@@ -33,7 +34,7 @@ export default function Navbar() {
 						<div className="navbar-item">
 							<div className="buttons">
 								<button className="button is-primary is-outlined is-rounded">
-									<i className="fa-solid fa-cart-shopping"></i>
+									<i className="fa-solid fa-cart-shopping fa-lg"></i>
 									<div
 										id="number-items"
 										className="tag is-danger is-small"
