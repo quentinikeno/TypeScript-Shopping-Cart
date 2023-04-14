@@ -1,0 +1,6 @@
+#number-items {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	transform: translate(25%, 25%);
+}
