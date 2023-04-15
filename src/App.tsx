@@ -3,8 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Store from "./pages/Store";
 import Navbar from "./components/Navbar";
-import { RootState, useAppDispatch } from "./redux/store";
-import { useSelector } from "react-redux";
+import { useAppDispatch } from "./redux/store";
 import { fetchProducts } from "./redux/productsSlice";
 
 function App() {
