@@ -19,7 +19,10 @@ export default function ProductCard({
 	rating,
 }: ProductCardProps) {
 	return (
-		<div className="ProductCard column is-3" key={id}>
+		<div
+			className="ProductCard mx-auto column is-three-quarters-mobile is-two-thirds-tablet is-half-desktop is-one-third-widescreen is-one-quarter-fullhd"
+			key={id}
+		>
 			<div className="card pt-3">
 				<div className="card-image">
 					<figure className="image is-128x128 mx-auto is-flex is-justify-content-center is-align-items-center">
