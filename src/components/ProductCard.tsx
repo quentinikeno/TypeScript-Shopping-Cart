@@ -43,7 +43,7 @@ export default function ProductCard({
 	const stars = generateStars(rate);
 
 	function handleClick() {
-		dispatch(incrementItem({ id, title, image }));
+		dispatch(incrementItem({ id, title, image, price }));
 	}
 
 	return (
