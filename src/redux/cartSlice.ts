@@ -35,6 +35,28 @@ export const cartSlice = createSlice({
 				state.cart[id] = { title, image, quantity };
 			}
 		},
+		decrementItem: (
+			state: CartState,
+			action: {
+				payload: number;
+			}
+		) => {
+			const id = action.payload;
+			if (state.cart[id].quantity === 1) {
+				delete state.cart[id];
+			} else {
+				state.cart[id].quantity -= 1;
+			}
+		},
+		deleteItem: (
+			state: CartState,
+			action: {
+				payload: number;
+			}
+		) => {
+			const id = action.payload;
+			delete state.cart[id];
+		},
 	},
 });
 
