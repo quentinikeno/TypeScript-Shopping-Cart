@@ -13,11 +13,6 @@ interface ProductCardProps {
 	};
 }
 
-function addToCart(id: number, title: string, image: string) {
-	const dispatch = useAppDispatch();
-	dispatch(incrementItem({ id, title, image }));
-}
-
 function generateStars(rate: number) {
 	const roundedRating = Math.round(rate);
 	const roundedRatingToHalf = Math.round(rate * 2) / 2;
@@ -43,11 +38,12 @@ export default function ProductCard({
 	price,
 	rating,
 }: ProductCardProps) {
+	const dispatch = useAppDispatch();
 	const { rate, count } = rating;
 	const stars = generateStars(rate);
 
 	function handleClick() {
-		addToCart(id, title, image);
+		dispatch(incrementItem({ id, title, image }));
 	}
 
 	return (
