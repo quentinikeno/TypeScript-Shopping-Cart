@@ -18,6 +18,19 @@ export default function ProductCard({
 	price,
 	rating,
 }: ProductCardProps) {
+	const { rate, count } = rating;
+	const roundedRating = Math.round(rate);
+	const roundedRatingToHalf = Math.round(rate * 2) / 2;
+	const stars = [];
+	for (let index = 1; index <= roundedRatingToHalf; index++) {
+		stars.push(<i className="fa-solid fa-star"></i>);
+	}
+	if (roundedRating - roundedRatingToHalf !== 0) {
+		stars.push(<i className="fa-solid fa-star-half-stroke"></i>);
+	}
+	while (stars.length < 5) {
+		stars.push(<i className="fa-regular fa-star"></i>);
+	}
 	return (
 		<div
 			className="ProductCard mx-auto column is-three-quarters-mobile is-two-thirds-tablet is-half-desktop is-one-third-widescreen is-one-quarter-fullhd"
@@ -36,7 +49,7 @@ export default function ProductCard({
 					</div>
 
 					<div className="content">
-						{rating.rate} {rating.count}
+						{rate} {stars} {count}
 					</div>
 				</div>
 			</div>
