@@ -1,3 +1,5 @@
+import { useAppDispatch } from "../redux/store";
+import { incrementItem } from "../redux/cartSlice";
 import "./ProductCard.css";
 
 interface ProductCardProps {
@@ -11,17 +13,16 @@ interface ProductCardProps {
 	};
 }
 
-export default function ProductCard({
-	id,
-	title,
-	image,
-	price,
-	rating,
-}: ProductCardProps) {
-	const { rate, count } = rating;
+function addToCart(id: number, title: string, image: string) {
+	const dispatch = useAppDispatch();
+	dispatch(incrementItem({ id, title, image }));
+}
+
+function generateStars(rate: number) {
 	const roundedRating = Math.round(rate);
 	const roundedRatingToHalf = Math.round(rate * 2) / 2;
-	const stars = [];
+	const stars: JSX.Element[] = [];
+
 	for (let index = 1; index <= roundedRatingToHalf; index++) {
 		stars.push(<i className="fa-solid fa-star"></i>);
 	}
@@ -31,6 +32,24 @@ export default function ProductCard({
 	while (stars.length < 5) {
 		stars.push(<i className="fa-regular fa-star"></i>);
 	}
+
+	return stars;
+}
+
+export default function ProductCard({
+	id,
+	title,
+	image,
+	price,
+	rating,
+}: ProductCardProps) {
+	const { rate, count } = rating;
+	const stars = generateStars(rate);
+
+	function handleClick() {
+		addToCart(id, title, image);
+	}
+
 	return (
 		<div
 			className="ProductCard mx-auto column is-three-quarters-mobile is-two-thirds-tablet is-half-desktop is-one-third-widescreen is-one-quarter-fullhd"
@@ -52,7 +71,10 @@ export default function ProductCard({
 						<p>
 							{rate} {stars} {count}
 						</p>
-						<button className="button is-fullwidth is-primary">
+						<button
+							onClick={handleClick}
+							className="button is-fullwidth is-primary"
+						>
 							Add to Cart
 						</button>
 					</div>
