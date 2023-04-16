@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import Product from "../interfaces/ProductInterface";
 import axios from "axios";
 
-export interface ProductsState {
+interface ProductsState {
 	products: Product[];
 	isLoading: boolean;
 	error: string;
