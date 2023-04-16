@@ -24,15 +24,14 @@ export const cartSlice = createSlice({
 					id: number;
 					title: string;
 					image: string;
-					quantity: number;
 				};
 			}
 		) => {
-			const { id, title, image, quantity } = action.payload;
+			const { id, title, image } = action.payload;
 			if (Object.hasOwn(state.cart, id)) {
 				state.cart[id].quantity += 1;
 			} else {
-				state.cart[id] = { title, image, quantity };
+				state.cart[id] = { title, image, quantity: 1 };
 			}
 		},
 		decrementItem: (
