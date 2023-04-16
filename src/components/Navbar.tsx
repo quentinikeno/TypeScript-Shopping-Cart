@@ -1,7 +1,9 @@
 import { NavLink } from "react-router-dom";
+import { useAppSelector } from "../redux/store";
 import "./Navbar.css";
 
 export default function Navbar() {
+	const { totalItems } = useAppSelector((state) => state.cart);
 	return (
 		<nav className="navbar" role="navigation" aria-label="main navigation">
 			<div className="container">
@@ -39,7 +41,7 @@ export default function Navbar() {
 										id="number-items"
 										className="tag is-danger is-small"
 									>
-										2
+										{totalItems}
 									</div>
 								</button>
 							</div>
