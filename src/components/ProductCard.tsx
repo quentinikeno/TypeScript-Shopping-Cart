@@ -45,7 +45,9 @@ export default function ProductCard({
 				<div className="card-content">
 					<div className="media-content">
 						<p className="title is-4">{title}</p>
-						<p className="subtitle is-6">{price}</p>
+						<p className="subtitle is-5 my-2">
+							${price.toFixed(2)}
+						</p>
 					</div>
 
 					<div className="content">
