@@ -48,8 +48,13 @@ export default function ProductCard({
 						<p className="subtitle is-5">${price.toFixed(2)}</p>
 					</div>
 
-					<div className="content">
-						{rate} {stars} {count}
+					<div className="content mt-3">
+						<p>
+							{rate} {stars} {count}
+						</p>
+						<button className="button is-fullwidth is-primary">
+							Add to Cart
+						</button>
 					</div>
 				</div>
 			</div>
