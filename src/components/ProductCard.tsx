@@ -36,8 +36,8 @@ export default function ProductCard({
 			className="ProductCard mx-auto column is-three-quarters-mobile is-two-thirds-tablet is-half-desktop is-one-third-widescreen is-one-quarter-fullhd"
 			key={id}
 		>
-			<div className="card pt-3">
-				<div className="card-image">
+			<div className="card has-background-light">
+				<div className="card-image py-3 has-background-white">
 					<figure className="image is-128x128 mx-auto is-flex is-justify-content-center is-align-items-center">
 						<img src={image} alt={title} />
 					</figure>
@@ -45,9 +45,7 @@ export default function ProductCard({
 				<div className="card-content">
 					<div className="media-content">
 						<p className="title is-4">{title}</p>
-						<p className="subtitle is-5 my-2">
-							${price.toFixed(2)}
-						</p>
+						<p className="subtitle is-5">${price.toFixed(2)}</p>
 					</div>
 
 					<div className="content">
