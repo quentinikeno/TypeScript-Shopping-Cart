@@ -1,6 +1,7 @@
 import { slide as Menu, State } from "react-burger-menu";
 import { useAppSelector, useAppDispatch } from "../redux/store";
 import { changeOpenState } from "../redux/cartSideBarSlice";
+import useWindowWidth from "../hooks/useWindowWidth";
 import "./cartSidebar.css";
 
 export default function cartSidebar() {
@@ -8,6 +9,7 @@ export default function cartSidebar() {
 	const { isOpen } = useAppSelector((state) => state.cartSidebar);
 	const cartItems = useAppSelector((state) => state.cart);
 	const cartItemsTSX: JSX.Element[] = [];
+	const windowWidth: number | undefined = useWindowWidth();
 
 	for (const [key, value] of Object.entries(cartItems.cart)) {
 		cartItemsTSX.push(
@@ -30,6 +32,11 @@ export default function cartSidebar() {
 			isOpen={isOpen}
 			onStateChange={(state: State) => dispatch(changeOpenState(state))}
 			customBurgerIcon={false}
+			width={
+				typeof windowWidth === "number" && windowWidth < 500
+					? "100%"
+					: "500px"
+			}
 		>
 			<h2 className="is-size-4 has-text-light">
 				Your Cart <i className="fa-solid fa-cart-shopping fa-lg"></i>
