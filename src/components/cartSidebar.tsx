@@ -35,7 +35,11 @@ export default function cartSidebar() {
 				Your Cart <i className="fa-solid fa-cart-shopping fa-lg"></i>
 			</h2>
 			<hr />
-			{cartItemsTSX}
+			{cartItemsTSX.length ? (
+				cartItemsTSX
+			) : (
+				<p className="has-text-light is-size-4">Your Cart is Empty.</p>
+			)}
 			<hr />
 			<p className="is-size-4 has-text-light pb-5">
 				Total: ${cartItems.totalPrice.toFixed(2)}
