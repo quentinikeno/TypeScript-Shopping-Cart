@@ -1,4 +1,4 @@
-import { useAppDispatch } from "../redux/store";
+import { useAppDispatch, useAppSelector } from "../redux/store";
 import { incrementItem } from "../redux/cartSlice";
 import "./ProductCard.css";
 
@@ -46,11 +46,25 @@ export default function ProductCard({
 	rating,
 }: ProductCardProps) {
 	const dispatch = useAppDispatch();
+	const cartState = useAppSelector((state) => state.cart);
 	const { rate, count } = rating;
 	const stars = generateStars(rate);
 
 	function handleClick() {
 		dispatch(incrementItem({ id, title, image, price }));
+		addItemLocalStorage();
+	}
+
+	function addItemLocalStorage() {
+		const cartStateCopy = JSON.parse(JSON.stringify(cartState)); // make a deep copy
+		if (Object.hasOwn(cartState.cart, id)) {
+			cartStateCopy.cart[id].quantity += 1;
+		} else {
+			cartStateCopy.cart[id] = { title, image, quantity: 1, price };
+		}
+		cartStateCopy.totalPrice += +price.toFixed(2);
+		cartStateCopy.totalItems += 1;
+		localStorage.setItem("cart", JSON.stringify(cartStateCopy));
 	}
 
 	return (
