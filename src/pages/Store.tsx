@@ -15,7 +15,7 @@ export default function Store() {
 	));
 	return (
 		<div>
-			<div className="columns is-desktop is-multiline">
+			<div className="columns is-desktop is-multiline mt-3 mb-5">
 				{productCards}
 			</div>
 		</div>
