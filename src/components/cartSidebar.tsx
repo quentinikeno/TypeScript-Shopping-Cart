@@ -48,7 +48,8 @@ export default function cartSidebar() {
 			)}
 			<hr />
 			<p className="is-size-4 has-text-light pb-5">
-				Total: ${cartItems.totalPrice.toFixed(2)}
+				Total: $
+				{(Math.round(+cartItems.totalPrice * 100) / 100).toFixed(2)}
 			</p>
 		</Menu>
 	);
