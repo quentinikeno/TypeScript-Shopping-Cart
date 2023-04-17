@@ -1,4 +1,4 @@
-import { useAppDispatch } from "../redux/store";
+import { useAppDispatch, useAppSelector } from "../redux/store";
 import { decrementItem, deleteItem } from "../redux/cartSlice";
 
 interface CardItemCardProps {
@@ -17,9 +17,24 @@ export default function CardItemCard({
 	id,
 }: CardItemCardProps) {
 	const dispatch = useAppDispatch();
+	const cartState = useAppSelector((state) => state.cart);
 
 	function handleRemoveOne() {
 		dispatch(decrementItem(id));
+		removeOneLocalStorage();
+	}
+
+	function removeOneLocalStorage() {
+		const cartStateCopy = JSON.parse(JSON.stringify(cartState)); // make a deep copy
+		const { price } = cartStateCopy.cart[id];
+		if (cartStateCopy.cart[id].quantity === 1) {
+			delete cartStateCopy.cart[id];
+		} else {
+			cartStateCopy.cart[id].quantity -= 1;
+		}
+		cartStateCopy.totalPrice -= +price.toFixed(2);
+		cartStateCopy.totalItems -= 1;
+		localStorage.setItem("cart", JSON.stringify(cartStateCopy));
 	}
 
 	function handleDelete() {
