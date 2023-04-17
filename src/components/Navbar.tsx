@@ -1,11 +1,13 @@
 import { NavLink } from "react-router-dom";
 import { useAppSelector, useAppDispatch } from "../redux/store";
 import { openSidebar } from "../redux/cartSideBarSlice";
+import useToggleState from "../hooks/useToggleState";
 import "./Navbar.css";
 
 export default function Navbar() {
 	const dispatch = useAppDispatch();
 	const { totalItems } = useAppSelector((state) => state.cart);
+	const [hamburger, setHamburger] = useToggleState(false);
 
 	function handleClick() {
 		dispatch(openSidebar());
@@ -18,10 +20,13 @@ export default function Navbar() {
 					<i className="fa-solid fa-shop navbar-item fa-2x"></i>
 					<a
 						role="button"
-						className="navbar-burger"
+						className={`navbar-burger ${
+							hamburger ? "is-active" : ""
+						}`}
 						aria-label="menu"
 						aria-expanded="false"
-						data-target="navbarBasicExample"
+						data-target="navbarTarget"
+						onClick={setHamburger}
 					>
 						<span aria-hidden="true"></span>
 						<span aria-hidden="true"></span>
@@ -29,7 +34,10 @@ export default function Navbar() {
 					</a>
 				</div>
 
-				<div id="navbarBasicExample" className="navbar-menu">
+				<div
+					id="navbarTarget"
+					className={`navbar-menu ${hamburger ? "is-active" : ""}`}
+				>
 					<div className="navbar-start">
 						<NavLink to="/" className="navbar-item">
 							Home
