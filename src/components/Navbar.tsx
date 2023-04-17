@@ -1,9 +1,16 @@
 import { NavLink } from "react-router-dom";
-import { useAppSelector } from "../redux/store";
+import { useAppSelector, useAppDispatch } from "../redux/store";
+import { openSidebar } from "../redux/cartSideBarSlice";
 import "./Navbar.css";
 
 export default function Navbar() {
+	const dispatch = useAppDispatch();
 	const { totalItems } = useAppSelector((state) => state.cart);
+
+	function handleClick() {
+		dispatch(openSidebar());
+	}
+
 	return (
 		<nav className="navbar" role="navigation" aria-label="main navigation">
 			<div className="container">
@@ -35,7 +42,10 @@ export default function Navbar() {
 					<div className="navbar-end">
 						<div className="navbar-item">
 							<div className="buttons">
-								<button className="button is-primary is-outlined is-rounded">
+								<button
+									className="button is-primary is-outlined is-rounded"
+									onClick={handleClick}
+								>
 									<i className="fa-solid fa-cart-shopping fa-lg"></i>
 									<div
 										id="number-items"
