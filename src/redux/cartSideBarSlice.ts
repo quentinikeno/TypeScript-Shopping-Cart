@@ -20,7 +20,6 @@ export const cartSidebarSlice = createSlice({
 			state: cartSidbarState,
 			action: { payload: State }
 		) => {
-			console.log(action.payload);
 			state.isOpen = action.payload.isOpen;
 		},
 	},
