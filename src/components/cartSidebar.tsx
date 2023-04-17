@@ -2,6 +2,7 @@ import { slide as Menu, State } from "react-burger-menu";
 import { useAppSelector, useAppDispatch } from "../redux/store";
 import { changeOpenState } from "../redux/cartSideBarSlice";
 import useWindowWidth from "../hooks/useWindowWidth";
+import CardItemCard from "./CartItemCard";
 import "./cartSidebar.css";
 
 export default function cartSidebar() {
@@ -12,17 +13,15 @@ export default function cartSidebar() {
 	const windowWidth: number | undefined = useWindowWidth();
 
 	for (const [key, value] of Object.entries(cartItems.cart)) {
+		const id = parseInt(key);
 		cartItemsTSX.push(
-			<div className="box cart-item">
-				<h5 className="is-size-5 has-text-weight-bold">
-					{value.title}
-				</h5>
-				<p>
-					<i className="fa-solid fa-xmark"></i> {value.quantity}
-				</p>
-				<img src={value.image} alt={value.title} className="my-3" />
-				<p>${value.price.toFixed(2)} Each</p>
-			</div>
+			<CardItemCard
+				title={value.title}
+				quantity={value.quantity}
+				image={value.image}
+				price={value.price}
+				id={id}
+			/>
 		);
 	}
 
