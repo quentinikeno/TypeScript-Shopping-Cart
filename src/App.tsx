@@ -11,7 +11,7 @@ function App() {
 	const dispatch = useAppDispatch();
 	useEffect(() => {
 		dispatch(fetchProducts("https://fakestoreapi.com/products"));
-	});
+	}, []);
 	return (
 		<div className="App " id="outer-container">
 			<CartSidebar />
