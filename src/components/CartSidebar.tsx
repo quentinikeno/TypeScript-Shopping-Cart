@@ -3,7 +3,7 @@ import { useAppSelector, useAppDispatch } from "../redux/store";
 import { changeOpenState } from "../redux/cartSideBarSlice";
 import useWindowWidth from "../hooks/useWindowWidth";
 import CardItemCard from "./CartItemCard";
-import "./cartSidebar.css";
+import "./CartSidebar.css";
 
 export default function cartSidebar() {
 	const dispatch = useAppDispatch();

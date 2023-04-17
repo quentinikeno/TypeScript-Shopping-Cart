@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Store from "./pages/Store";
 import Navbar from "./components/Navbar";
-import CartSidebar from "./components/cartSidebar";
+import CartSidebar from "./components/CartSidebar";
 import { useAppDispatch } from "./redux/store";
 import { fetchProducts } from "./redux/productsSlice";
 
