@@ -39,7 +39,7 @@ export const cartSlice = createSlice({
 			} else {
 				state.cart[id] = { title, image, quantity: 1, price };
 			}
-			state.totalPrice += price;
+			state.totalPrice += +price.toFixed(2);
 			state.totalItems += 1;
 		},
 		decrementItem: (
@@ -55,7 +55,7 @@ export const cartSlice = createSlice({
 			} else {
 				state.cart[id].quantity -= 1;
 			}
-			state.totalPrice -= price;
+			state.totalPrice -= +price.toFixed(2);
 			state.totalItems -= 1;
 		},
 		deleteItem: (
@@ -66,7 +66,7 @@ export const cartSlice = createSlice({
 		) => {
 			const id = action.payload;
 			const { price, quantity } = state.cart[id];
-			state.totalPrice -= price * quantity;
+			state.totalPrice -= +price.toFixed(2) * quantity;
 			state.totalItems -= quantity;
 			delete state.cart[id];
 		},
