@@ -1,8 +1,9 @@
+import Loading from "../components/Loading";
 import ProductCard from "../components/ProductCard";
 import { useAppSelector } from "../redux/store";
 
 export default function Store() {
-	const products = useAppSelector((state) => state.products.products);
+	const { products, isLoading } = useAppSelector((state) => state.products);
 	const productCards = products.map((product) => (
 		<ProductCard
 			id={product.id}
@@ -15,9 +16,13 @@ export default function Store() {
 	));
 	return (
 		<div>
-			<div className="columns is-desktop is-multiline mt-3 mb-5">
-				{productCards}
-			</div>
+			{isLoading ? (
+				<Loading />
+			) : (
+				<div className="columns is-desktop is-multiline mt-3 mb-5">
+					{productCards}
+				</div>
+			)}
 		</div>
 	);
 }
