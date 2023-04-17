@@ -5,7 +5,7 @@ import useWindowWidth from "../hooks/useWindowWidth";
 import CardItemCard from "./CartItemCard";
 import "./CartSidebar.css";
 
-export default function cartSidebar() {
+export default function CartSidebar() {
 	const dispatch = useAppDispatch();
 	const { isOpen } = useAppSelector((state) => state.cartSidebar);
 	const cartItems = useAppSelector((state) => state.cart);
@@ -21,6 +21,7 @@ export default function cartSidebar() {
 				image={value.image}
 				price={value.price}
 				id={id}
+				key={id}
 			/>
 		);
 	}
