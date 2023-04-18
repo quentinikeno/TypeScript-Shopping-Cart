@@ -6,12 +6,23 @@ import Navbar from "./components/Navbar";
 import CartSidebar from "./components/CartSidebar";
 import { useAppDispatch } from "./redux/store";
 import { fetchProducts } from "./redux/productsSlice";
+import { setInitialState } from "./redux/cartSlice";
 
 function App() {
 	const dispatch = useAppDispatch();
+
+	function updateCartFromLocalStorage() {
+		const storedCart = localStorage.getItem("cart");
+		if (storedCart) {
+			dispatch(setInitialState(JSON.parse(storedCart)));
+		}
+	}
+
 	useEffect(() => {
 		dispatch(fetchProducts("https://fakestoreapi.com/products"));
+		updateCartFromLocalStorage();
 	}, []);
+
 	return (
 		<div className="App " id="outer-container">
 			<CartSidebar />
