@@ -6,7 +6,7 @@ interface CartProduct {
 	quantity: number;
 	price: number;
 }
-interface CartState {
+export interface CartState {
 	cart: { [id: number]: CartProduct };
 	totalPrice: number;
 	totalItems: number;
