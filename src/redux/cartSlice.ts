@@ -22,6 +22,12 @@ export const cartSlice = createSlice({
 	name: "cart",
 	initialState,
 	reducers: {
+		setInitialState: (state: CartState, action: { payload: CartState }) => {
+			const { cart, totalPrice, totalItems } = action.payload;
+			state.cart = cart;
+			state.totalPrice = totalPrice;
+			state.totalItems = totalItems;
+		},
 		incrementItem: (
 			state: CartState,
 			action: {
@@ -34,11 +40,13 @@ export const cartSlice = createSlice({
 			}
 		) => {
 			const { id, title, image, price } = action.payload;
+
 			if (Object.hasOwn(state.cart, id)) {
 				state.cart[id].quantity += 1;
 			} else {
 				state.cart[id] = { title, image, quantity: 1, price };
 			}
+
 			state.totalPrice += +price.toFixed(2);
 			state.totalItems += 1;
 		},
@@ -50,11 +58,13 @@ export const cartSlice = createSlice({
 		) => {
 			const id = action.payload;
 			const { price } = state.cart[id];
+
 			if (state.cart[id].quantity === 1) {
 				delete state.cart[id];
 			} else {
 				state.cart[id].quantity -= 1;
 			}
+
 			state.totalPrice -= +price.toFixed(2);
 			state.totalItems -= 1;
 		},
@@ -66,6 +76,7 @@ export const cartSlice = createSlice({
 		) => {
 			const id = action.payload;
 			const { price, quantity } = state.cart[id];
+
 			state.totalPrice -= +price.toFixed(2) * quantity;
 			state.totalItems -= quantity;
 			delete state.cart[id];
@@ -73,6 +84,7 @@ export const cartSlice = createSlice({
 	},
 });
 
-export const { incrementItem, decrementItem, deleteItem } = cartSlice.actions;
+export const { setInitialState, incrementItem, decrementItem, deleteItem } =
+	cartSlice.actions;
 
 export default cartSlice.reducer;
