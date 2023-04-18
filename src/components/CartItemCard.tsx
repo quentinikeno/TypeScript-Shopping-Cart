@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from "../redux/store";
-import { decrementItem, deleteItem } from "../redux/cartSlice";
+import { CartState, decrementItem, deleteItem } from "../redux/cartSlice";
 
 interface CardItemCardProps {
 	title: string;
@@ -25,21 +25,45 @@ export default function CardItemCard({
 	}
 
 	function removeOneLocalStorage() {
-		const cartStateCopy = JSON.parse(JSON.stringify(cartState)); // make a deep copy
+		const cartStateCopy: CartState = JSON.parse(JSON.stringify(cartState)); // make a deep copy
 		const { price } = cartStateCopy.cart[id];
+
 		if (cartStateCopy.cart[id].quantity === 1) {
 			delete cartStateCopy.cart[id];
 		} else {
 			cartStateCopy.cart[id].quantity -= 1;
 		}
+
 		cartStateCopy.totalPrice -= +price.toFixed(2);
 		cartStateCopy.totalItems -= 1;
-		localStorage.setItem("cart", JSON.stringify(cartStateCopy));
+
+		setStorage(cartStateCopy);
 	}
 
 	function handleDelete() {
 		dispatch(deleteItem(id));
+		deleteFromLocalStorage();
 	}
+
+	function deleteFromLocalStorage() {
+		const cartStateCopy: CartState = JSON.parse(JSON.stringify(cartState)); // make a deep copy
+		const { price, quantity } = cartStateCopy.cart[id];
+
+		cartStateCopy.totalPrice -= +price.toFixed(2) * quantity;
+		cartStateCopy.totalItems -= quantity;
+		delete cartStateCopy.cart[id];
+
+		setStorage(cartStateCopy);
+	}
+
+	function setStorage(state: CartState) {
+		if (state.totalItems > 0) {
+			localStorage.setItem("cart", JSON.stringify(state));
+		} else {
+			localStorage.removeItem("cart");
+		}
+	}
+
 	return (
 		<div className="box cart-item">
 			<h5 className="is-size-5 has-text-weight-bold">{title}</h5>
