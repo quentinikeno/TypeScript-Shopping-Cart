@@ -15,7 +15,7 @@ export default function Store() {
 		/>
 	));
 	return (
-		<div>
+		<section>
 			{isLoading ? (
 				<Loading />
 			) : (
@@ -23,6 +23,6 @@ export default function Store() {
 					{productCards}
 				</div>
 			)}
-		</div>
+		</section>
 	);
 }
