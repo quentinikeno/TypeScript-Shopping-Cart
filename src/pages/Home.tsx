@@ -23,7 +23,7 @@ export default function Home() {
 				</div>
 			</section>
 			<section className="columns is-desktop has-text-centered">
-				<div className="column is-one-third">
+				<div className="column is-three-quarters-mobile is-two-thirds-tablet is-half-desktop is-one-third-widescreen is-one-quarter-fullhd mx-auto">
 					<img
 						src={womanShopping}
 						alt="Woman with a shopping cart."
@@ -45,7 +45,7 @@ export default function Home() {
 			</section>
 			<section className="columns is-desktop has-text-centered">
 				<div className="column is-flex is-justify-content-center is-align-items-center">
-					<div>
+					<div className="p-5">
 						<h2 className="is-size-2">
 							Find everything you want online.
 						</h2>
@@ -54,7 +54,7 @@ export default function Home() {
 						</p>
 					</div>
 				</div>
-				<div className="column is-one-third">
+				<div className="column is-three-quarters-mobile is-two-thirds-tablet is-half-desktop is-one-third-widescreen is-one-quarter-fullhd mx-auto">
 					<img src={guyShopping} alt="Guy shopping on laptop." />
 				</div>
 			</section>
