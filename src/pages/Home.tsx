@@ -6,17 +6,19 @@ import "./Home.css";
 export default function Home() {
 	return (
 		<>
-			<section className="hero is-medium mt-3 has-text-centered">
+			<section className="hero is-medium mt-3 has-background-light">
 				<div className="hero-body">
-					<div>
-						<h1 className="title is-size-1 has-text-white mt-3">
-							The Fake Store
-						</h1>
-						<button className="button is-primary">
-							<NavLink to="/store" className="has-text-white">
-								Shop Now
+					<div className="columns">
+						<div className="column">
+							<h1 className="title is-size-1 mt-3">
+								The Fake Store
+							</h1>
+							<NavLink to="/store">
+								<button className="button is-large is-responsive is-primary">
+									Shop Now
+								</button>
 							</NavLink>
-						</button>
+						</div>
 					</div>
 				</div>
 			</section>
