@@ -12,6 +12,7 @@ export default function Store() {
 			price={product.price}
 			rating={product.rating}
 			key={product.id}
+			description={product.description}
 		/>
 	));
 	return (

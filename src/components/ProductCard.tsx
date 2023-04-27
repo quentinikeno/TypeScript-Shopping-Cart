@@ -12,6 +12,7 @@ interface ProductCardProps {
 		rate: number;
 		count: number;
 	};
+	description: string;
 }
 
 function generateStars(rate: number) {
@@ -45,6 +46,7 @@ export default function ProductCard({
 	image,
 	price,
 	rating,
+	description,
 }: ProductCardProps) {
 	const dispatch = useAppDispatch();
 	const cartState = useAppSelector((state) => state.cart);
@@ -83,13 +85,16 @@ export default function ProductCard({
 				<div className="card-content">
 					<div className="media-content">
 						<p className="title is-4">{title}</p>
-						<p className="subtitle is-5">${price.toFixed(2)}</p>
 					</div>
 
 					<div className="content mt-3">
+						<p className="subtitle is-5">${price.toFixed(2)}</p>
+
 						<p>
 							{rate} {stars} {count}
 						</p>
+
+						<p>{description}</p>
 						<button
 							onClick={handleClick}
 							className="button is-fullwidth is-primary"
