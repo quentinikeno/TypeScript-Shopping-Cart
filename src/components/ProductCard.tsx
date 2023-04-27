@@ -99,6 +99,14 @@ export default function ProductCard({
 						<p>
 							{rate} {stars} {count}
 						</p>
+
+						<button
+							onClick={handleClick}
+							className="button is-fullwidth is-primary"
+						>
+							Add to Cart
+						</button>
+
 						<div>
 							<button
 								className="card-header-icon px-0"
@@ -117,14 +125,9 @@ export default function ProductCard({
 							</button>
 						</div>
 
-						{isShowing && <p>{description}</p>}
-
-						<button
-							onClick={handleClick}
-							className="button is-fullwidth is-primary"
-						>
-							Add to Cart
-						</button>
+						{isShowing && (
+							<p className="description">{description}</p>
+						)}
 					</div>
 				</div>
 			</div>
