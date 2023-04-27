@@ -45,6 +45,7 @@ export default function CardItemCard({
 	function handleDelete() {
 		dispatch(deleteItem(id));
 		deleteFromLocalStorage();
+		toast.success(`Removed ${quantity} ${title} from Cart!`);
 	}
 
 	function deleteFromLocalStorage() {
