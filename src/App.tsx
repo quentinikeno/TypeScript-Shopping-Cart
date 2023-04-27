@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import Store from "./pages/Store";
 import Navbar from "./components/Navbar";
 import CartSidebar from "./components/CartSidebar";
+import Footer from "./components/Footer";
 import { useAppDispatch } from "./redux/store";
 import { fetchProducts } from "./redux/productsSlice";
 import { setInitialState } from "./redux/cartSlice";
@@ -33,6 +34,7 @@ function App() {
 					<Route path="/store" element={<Store />} />
 				</Routes>
 			</div>
+			<Footer />
 		</div>
 	);
 }
