@@ -23,7 +23,7 @@ export default function CardItemCard({
 	function handleRemoveOne() {
 		dispatch(decrementItem(id));
 		removeOneLocalStorage();
-		toast.success(`Removed 1 ${title} from Cart!`);
+		toast.success(`Removed 1 ${title} from Your Cart!`);
 	}
 
 	function removeOneLocalStorage() {
@@ -45,7 +45,7 @@ export default function CardItemCard({
 	function handleDelete() {
 		dispatch(deleteItem(id));
 		deleteFromLocalStorage();
-		toast.success(`Removed ${quantity} ${title} from Cart!`);
+		toast.success(`Removed ${quantity} ${title} from Your Cart!`);
 	}
 
 	function deleteFromLocalStorage() {
