@@ -8,6 +8,7 @@ import Footer from "./components/Footer";
 import { useAppDispatch } from "./redux/store";
 import { fetchProducts } from "./redux/productsSlice";
 import { setInitialState } from "./redux/cartSlice";
+import { Toaster } from "react-hot-toast";
 
 function App() {
 	const dispatch = useAppDispatch();
@@ -34,6 +35,7 @@ function App() {
 					<Route path="/store" element={<Store />} />
 				</Routes>
 			</div>
+			<Toaster />
 			<Footer />
 		</div>
 	);
