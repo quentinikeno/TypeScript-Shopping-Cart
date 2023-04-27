@@ -1,6 +1,7 @@
 import { useAppDispatch, useAppSelector } from "../redux/store";
 import { incrementItem } from "../redux/cartSlice";
 import { toast } from "react-hot-toast";
+import useToggleState from "../hooks/useToggleState";
 import "./ProductCard.css";
 
 interface ProductCardProps {
@@ -52,11 +53,16 @@ export default function ProductCard({
 	const cartState = useAppSelector((state) => state.cart);
 	const { rate, count } = rating;
 	const stars = generateStars(rate);
+	const [isShowing, setIsShowing] = useToggleState(false);
 
 	function handleClick() {
 		dispatch(incrementItem({ id, title, image, price }));
 		addItemLocalStorage();
 		toast.success("Added to Cart!");
+	}
+
+	function toggleDescription() {
+		setIsShowing();
 	}
 
 	function addItemLocalStorage() {
@@ -93,8 +99,26 @@ export default function ProductCard({
 						<p>
 							{rate} {stars} {count}
 						</p>
+						<div>
+							<button
+								className="card-header-icon px-0"
+								aria-label="more options"
+								onClick={toggleDescription}
+							>
+								See More
+								<span className="icon">
+									<i
+										className={`pt-1 fas fa-angle-${
+											isShowing ? "up" : "down"
+										}`}
+										aria-hidden="true"
+									></i>
+								</span>
+							</button>
+						</div>
 
-						<p>{description}</p>
+						{isShowing && <p>{description}</p>}
+
 						<button
 							onClick={handleClick}
 							className="button is-fullwidth is-primary"
