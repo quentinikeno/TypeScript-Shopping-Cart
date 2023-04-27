@@ -1,5 +1,6 @@
 import { useAppDispatch, useAppSelector } from "../redux/store";
 import { CartState, decrementItem, deleteItem } from "../redux/cartSlice";
+import { toast } from "react-hot-toast";
 
 interface CardItemCardProps {
 	title: string;
@@ -22,6 +23,7 @@ export default function CardItemCard({
 	function handleRemoveOne() {
 		dispatch(decrementItem(id));
 		removeOneLocalStorage();
+		toast.success(`Removed 1 ${title} from Cart!`);
 	}
 
 	function removeOneLocalStorage() {
