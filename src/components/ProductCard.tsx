@@ -1,5 +1,6 @@
 import { useAppDispatch, useAppSelector } from "../redux/store";
 import { incrementItem } from "../redux/cartSlice";
+import { toast } from "react-hot-toast";
 import "./ProductCard.css";
 
 interface ProductCardProps {
@@ -53,6 +54,7 @@ export default function ProductCard({
 	function handleClick() {
 		dispatch(incrementItem({ id, title, image, price }));
 		addItemLocalStorage();
+		toast.success("Added to Cart!");
 	}
 
 	function addItemLocalStorage() {
