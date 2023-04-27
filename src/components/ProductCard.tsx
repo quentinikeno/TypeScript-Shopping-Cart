@@ -2,6 +2,7 @@ import { useAppDispatch, useAppSelector } from "../redux/store";
 import { incrementItem } from "../redux/cartSlice";
 import { toast } from "react-hot-toast";
 import useToggleState from "../hooks/useToggleState";
+import useGenerateStars from "../hooks/useGenerateStars";
 import "./ProductCard.css";
 
 interface ProductCardProps {
@@ -16,31 +17,6 @@ interface ProductCardProps {
 	description: string;
 }
 
-function generateStars(rate: number) {
-	const roundedRating = Math.round(rate);
-	const roundedRatingToHalf = Math.round(rate * 2) / 2;
-	const stars: JSX.Element[] = [];
-
-	for (let index = 1; index <= roundedRatingToHalf; index++) {
-		stars.push(<i className="fa-solid fa-star" key={index}></i>);
-	}
-	if (roundedRating - roundedRatingToHalf !== 0) {
-		stars.push(
-			<i
-				className="fa-solid fa-star-half-stroke"
-				key={stars.length + 1}
-			></i>
-		);
-	}
-	while (stars.length < 5) {
-		stars.push(
-			<i className="fa-regular fa-star" key={stars.length + 1}></i>
-		);
-	}
-
-	return stars;
-}
-
 export default function ProductCard({
 	id,
 	title,
@@ -52,7 +28,7 @@ export default function ProductCard({
 	const dispatch = useAppDispatch();
 	const cartState = useAppSelector((state) => state.cart);
 	const { rate, count } = rating;
-	const stars = generateStars(rate);
+	const stars = useGenerateStars(rate);
 	const [isShowing, setIsShowing] = useToggleState(false);
 
 	function handleClick() {
