@@ -2,7 +2,7 @@
 
 ## What is this?
 
-This is a front-end application where users can browser a list of fake items and add them to a shopping cart. This is mainly a practice app for me to get experience using TypeScript with React.
+This is a front-end application where users can browser a list of fake items and add them to a shopping cart. This is mainly a practice app for me to get experience using TypeScript with React.  Item data comes from the [Fake Store API](https://fakestoreapi.com/).
 
 ## Link to Deployed App
 
