@@ -6,7 +6,7 @@ This is a front-end application where users can browser a list of fake items and
 
 ## Link to Deployed App
 
-Try the app using [this link](https://fakeshopping.surge.sh/store).
+Try the app using [this link](https://fakeshopping.surge.sh).
 
 ## Technologies Used
 
