@@ -1,7 +1,7 @@
+import { useRef } from "react";
 import { useAppDispatch, useAppSelector } from "../redux/store";
 import { incrementItem } from "../redux/cartSlice";
 import { toast } from "react-hot-toast";
-import useToggleState from "../hooks/useToggleState";
 import useGenerateStars from "../hooks/useGenerateStars";
 import "./ProductCard.css";
 
@@ -25,12 +25,11 @@ export default function ProductCard({
 	rating,
 	description,
 }: ProductCardProps) {
+	const modalRef = useRef<null | HTMLDialogElement>(null);
 	const dispatch = useAppDispatch();
 	const cartState = useAppSelector((state) => state.cart);
 	const { rate, count } = rating;
 	const stars = useGenerateStars(rate);
-	const [isShowing, setIsShowing] = useToggleState(false);
-
 	function handleClick() {
 		dispatch(incrementItem({ id, title, image, price }));
 		addItemLocalStorage();
@@ -38,7 +37,11 @@ export default function ProductCard({
 	}
 
 	function toggleDescription() {
-		setIsShowing();
+		modalRef.current?.showModal();
+	}
+
+	function closeModal() {
+		modalRef.current?.close();
 	}
 
 	function addItemLocalStorage() {
@@ -54,59 +57,60 @@ export default function ProductCard({
 	}
 
 	return (
-		<div
-			className="ProductCard mx-auto column is-three-quarters-mobile is-two-thirds-tablet is-half-desktop is-one-third-widescreen is-one-quarter-fullhd"
-			key={id}
-		>
-			<div className="card has-background-light">
-				<div className="card-image py-3 has-background-white">
-					<figure className="image is-128x128 mx-auto is-flex is-justify-content-center is-align-items-center">
-						<img src={image} alt={title} />
-					</figure>
-				</div>
-				<div className="card-content">
-					<div className="media-content">
-						<p className="title is-4">{title}</p>
+		<>
+			<div
+				className="ProductCard mx-auto column is-three-quarters-mobile is-two-thirds-tablet is-half-desktop is-one-third-widescreen is-one-quarter-fullhd"
+				key={id}
+			>
+				<div className="card has-background-light">
+					<div className="card-image py-3 has-background-white">
+						<figure className="image is-128x128 mx-auto is-flex is-justify-content-center is-align-items-center">
+							<img src={image} alt={title} />
+						</figure>
 					</div>
-
-					<div className="content mt-3">
-						<p className="subtitle is-5">${price.toFixed(2)}</p>
-
-						<p>
-							{rate} {stars} {count}
-						</p>
-
-						<button
-							onClick={handleClick}
-							className="button is-fullwidth is-primary"
-						>
-							Add to Cart
-						</button>
-
-						<div>
-							<button
-								className="card-header-icon px-0"
-								aria-label="more options"
-								onClick={toggleDescription}
-							>
-								See More
-								<span className="icon">
-									<i
-										className={`pt-1 fas fa-angle-${
-											isShowing ? "up" : "down"
-										}`}
-										aria-hidden="true"
-									></i>
-								</span>
-							</button>
+					<div className="card-content">
+						<div className="media-content">
+							<p className="title is-4">{title}</p>
 						</div>
 
-						{isShowing && (
-							<p className="description">{description}</p>
-						)}
+						<div className="content mt-3">
+							<p className="subtitle is-5">${price.toFixed(2)}</p>
+
+							<p>
+								{rate} {stars} {count}
+							</p>
+
+							<button
+								onClick={handleClick}
+								className="button is-fullwidth is-primary"
+							>
+								Add to Cart
+							</button>
+
+							<div>
+								<button
+									className="button is-fullwidth is-info  mt-3"
+									aria-label="more options"
+									onClick={toggleDescription}
+								>
+									See More Info
+								</button>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
+			<dialog ref={modalRef}>
+				<button
+					className="delete is-block ml-auto"
+					onClick={closeModal}
+				>
+					Close
+				</button>
+				<p className="title">{title}</p>
+				<p className="is-size-5">Description:</p>
+				<p>{description}</p>
+			</dialog>
+		</>
 	);
 }
